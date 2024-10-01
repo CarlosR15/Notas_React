@@ -13,14 +13,12 @@ const ListaNotas: React.FC = () => {
   }
 
   const { notas, eliminarNota, editarNota, agregarNota, dispatchModal, modalState } = context;
-  const [items, setItems] = useState(notas); // Estado local para el arrastre
+  const [items, setItems] = useState(notas);
 
-  // Sincroniza el estado local con el contexto cuando cambien las notas
   useEffect(() => {
     setItems(notas);
   }, [notas]);
 
-  // Agrega un sensor para manejar los eventos de arrastre con el mouse (PointerSensor)
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
@@ -51,7 +49,7 @@ const ListaNotas: React.FC = () => {
   return (
     <div>
       <DndContext
-        sensors={sensors}  // Añade los sensores aquí
+        sensors={sensors}
         collisionDetection={closestCenter}
         onDragEnd={handleDragEnd}
       >
