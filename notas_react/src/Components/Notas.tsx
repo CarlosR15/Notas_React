@@ -1,5 +1,7 @@
 import React from "react";
 import { NotasProps } from "../Props/NotasProps";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
 interface CardNotaProps extends NotasProps {
     onDelete: (id: number) => void;
@@ -7,8 +9,15 @@ interface CardNotaProps extends NotasProps {
 }
 
 const CardNota: React.FC<CardNotaProps> = ({ id, titulo, texto, onDelete, onEdit }) => {
+    const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
+
+    const style = {
+        transform: CSS.Transform.toString(transform),
+        transition,
+    };
+
     return (
-        <div className="nota">
+        <div ref={setNodeRef} style={style} {...attributes} {...listeners} className="nota">
             <h2>{titulo}</h2>
             <p>{texto}</p>
             <div className="btnNotas">
