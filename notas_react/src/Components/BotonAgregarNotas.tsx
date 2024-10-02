@@ -35,15 +35,17 @@ const BtnAgregarNota: React.FC = () => {
 
   return (
     <>
-      <button onClick={handleOpenModal}>Agregar Nota</button>
-      <Modal
-        isOpen={state.isModalOpen}
-        onClose={handleCloseModal}
-        onSave={handleSaveNota}
-        titulo={state.titulo}
-        texto={state.texto}
-        dispatch={dispatch}
-      />
+      <div className='BtnAgregarNotas'>
+        <button onClick={handleOpenModal}>Agregar Nota</button>
+        <Modal
+          isOpen={state.isModalOpen}
+          onClose={handleCloseModal}
+          onSave={handleSaveNota}
+          titulo={state.titulo}
+          texto={state.texto}
+          dispatch={dispatch}
+        />
+      </div>
     </>
   );
 };

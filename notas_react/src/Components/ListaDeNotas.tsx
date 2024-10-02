@@ -3,7 +3,7 @@ import { NotasContext } from '../Context/NotasContext';
 import CardNota from './Notas';
 import Modal from './Modal';
 import { DndContext, closestCenter, useSensor, useSensors, PointerSensor } from '@dnd-kit/core';
-import { SortableContext, verticalListSortingStrategy, arrayMove } from '@dnd-kit/sortable';
+import { SortableContext, rectSwappingStrategy } from '@dnd-kit/sortable';
 
 const ListaNotas: React.FC = () => {
   const context = useContext(NotasContext);
@@ -12,7 +12,7 @@ const ListaNotas: React.FC = () => {
     throw new Error("ListaNotas debe estar dentro de un NotasProvider");
   }
 
-  const { notas, eliminarNota, editarNota, agregarNota, dispatchModal, modalState } = context;
+  const { notas, eliminarNota, editarNota, agregarNota, dispatchModal, modalState, actualizarOrden } = context;
   const [items, setItems] = useState(notas);
 
   useEffect(() => {
@@ -36,13 +36,17 @@ const ListaNotas: React.FC = () => {
 
   const handleDragEnd = (event: any) => {
     const { active, over } = event;
-
+  
     if (active.id !== over.id) {
-      setItems((prevItems) => {
-        const oldIndex = prevItems.findIndex(item => item.id === active.id);
-        const newIndex = prevItems.findIndex(item => item.id === over.id);
-        return arrayMove(prevItems, oldIndex, newIndex);
-      });
+      const activeIndex = items.findIndex(item => item.id === active.id);
+      const overIndex = items.findIndex(item => item.id === over.id);
+  
+      const newItems = [...items];
+  
+      [newItems[activeIndex], newItems[overIndex]] = [newItems[overIndex], newItems[activeIndex]];
+  
+      setItems(newItems);
+      actualizarOrden(newItems);
     }
   };
 
@@ -53,7 +57,7 @@ const ListaNotas: React.FC = () => {
         collisionDetection={closestCenter}
         onDragEnd={handleDragEnd}
       >
-        <SortableContext items={items} strategy={verticalListSortingStrategy}>
+        <SortableContext items={items} strategy={rectSwappingStrategy}>
           <div className="gridNotas">
             {items.map((nota) => (
               <CardNota
