@@ -37,9 +37,6 @@ body {
 .nota {
   background: #dddd;
   padding: 10px;
-  border: solid;
-  border-top: none;
-  border-left: none;
   border-radius: 10px;
   overflow: hidden;
   display: flex;
