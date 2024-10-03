@@ -36,7 +36,12 @@ const BtnAgregarNota: React.FC = () => {
   return (
     <>
       <div className='BtnAgregarNotas'>
-        <button onClick={handleOpenModal}>Agregar Nota</button>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+        <div className='btnAddNotes'>
+          <span id='addNotes' className="material-icons" onClick={handleOpenModal} style={{ cursor: "pointer" }}>
+            add_notes
+          </span>
+        </div>
         <Modal
           isOpen={state.isModalOpen}
           onClose={handleCloseModal}

@@ -1,16 +1,22 @@
 import { ModalProps } from "../Props/ModalProps";
 
-const ModalDetallesNota: React.FC<ModalProps> = ({ isOpen, onClose, titulo, texto }) => {
+interface ModalDetallesNotaProps extends ModalProps {
+  backgroundColor: string;
+}
+
+const ModalDetallesNota: React.FC<ModalDetallesNotaProps> = ({ isOpen, onClose, titulo, texto, backgroundColor }) => {
 
   if (!isOpen) {
     return null;
   }
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-content" style={{ backgroundColor }} onClick={(e) => e.stopPropagation()}>
         <h2>{titulo}</h2>
-        <p>{texto}</p>
+        <div className="divModalNotas">
+          <p>{texto}</p>
+        </div>
         <div>
           <button onClick={onClose}>Cerrar</button>
         </div>
