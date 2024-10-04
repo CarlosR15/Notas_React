@@ -51,6 +51,7 @@ body {
   justify-content: space-between;
   height: 90%;
   width: 95%;
+  max-height: 90%;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: static;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -85,7 +86,10 @@ body {
   border-radius: 10px;
 }
 
-
+.material-symbols-outlined:hover {
+  background-color: #31292949;
+  border-radius: 10px;
+}
 
 .divModalNotas {
   max-height: 50%;
@@ -167,6 +171,11 @@ body {
 }
 
 .material-icons {
+  font-family: 'Material Icons';
+  font-size: 24px;
+}
+
+.material-symbols-outlined {
   font-family: 'Material Icons';
   font-size: 24px;
 }

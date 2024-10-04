@@ -1,24 +1,28 @@
 import { useEffect } from 'react';
 import { ModalProps } from "../Props/ModalProps";
 
+//Componente modal que recibe los modal props
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, dispatch, titulo, texto }) => {
 
   useEffect(() => {
     if (!isOpen) {
-      dispatch({ type: 'RESET_FORM' });
+      dispatch({ type: 'RESET_FORM' }); //Si el modal no esta abierto, se resetea el formulario
     }
-  }, [isOpen, dispatch]);
+  }, [isOpen, dispatch]); //Se ejecuta cuando cambia el isOpen o dispatch
 
+  //Manejador del guardado de la nota
   const handleSave = () => {
     if (titulo && texto) {
       onSave(titulo, texto);
     }
   };
 
+  //Si el modal no esta abierto no hace na
   if (!isOpen) {
     return null;
   }
 
+  //El modal pues
   return (
     <div className="modal-overlay">
       <div className="modal-content">

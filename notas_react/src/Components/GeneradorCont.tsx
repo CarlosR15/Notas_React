@@ -1,28 +1,35 @@
 import { useDroppable } from '@dnd-kit/core';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import ModalConfirm from './ModalConfirmacion';
 
+//Definir los props que acepta el componente
 interface GeneradorContProps {
     onCreateContainer: () => void;
     children: React.ReactNode;
 }
 
+// Componente GeneradorCont
 const GeneradorCont: React.FC<GeneradorContProps> = ({ onCreateContainer, children }) => {
+    //configuracion del area dropeable
     const { isOver, setNodeRef } = useDroppable({
         id: 'contenedor-notas',
     });
 
-    const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+    const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false); //Estado pal modal de confirmacion
 
-    const handleDrop = () => {
+    //Manejador del evento soltar
+    const handleDrop = (event: React.DragEvent) => {
+        event.preventDefault();
         setIsConfirmModalOpen(true);
     };
 
+    // Confirmacion de la creacion de un contenedor
     const handleConfirmCreateContainer = () => {
         onCreateContainer();
         setIsConfirmModalOpen(false);
     };
 
+    // Cancelacion de la creacion del contenedor
     const handleCancelCreateContainer = () => {
         setIsConfirmModalOpen(false);
     };
@@ -31,6 +38,7 @@ const GeneradorCont: React.FC<GeneradorContProps> = ({ onCreateContainer, childr
         <div
             className='GeneradorCont'
             ref={setNodeRef}
+            onDragOver={(e) => e.preventDefault()}
             onDrop={handleDrop}
             style={{
                 border: isOver ? '2px dashed blue' : '2px solid gray',

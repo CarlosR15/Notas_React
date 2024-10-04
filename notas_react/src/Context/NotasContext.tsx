@@ -2,50 +2,44 @@ import { createContext, useState, ReactNode, useReducer } from 'react';
 import { NotasProps } from '../Props/NotasProps';
 import { modalReducer, State, Action } from '../Reducer/ModalReducer';
 
+//Interfaz pal contexto de las notas
 interface NotasContextProps {
-  notas: NotasProps[];
-  agregarNota: (titulo: string, texto: string) => void;
-  editarNota: (id: number, titulo: string, texto: string) => void;
-  eliminarNota: (id: number) => void;
-  actualizarOrden: (nuevoOrden: NotasProps[]) => void;
+  notas: NotasProps[]; //array de notas
+  agregarNota: (titulo: string, texto: string) => void;// funcion para agregar una nueva nota
+  editarNota: (id: number, titulo: string, texto: string) => void; //funcion para editar una nota existente
+  eliminarNota: (id: number) => void;//funcion para eliminar una nota
+  actualizarOrden: (nuevoOrden: NotasProps[]) => void;// pa actualizar el orden de las notas
   dispatchModal: React.Dispatch<Action>;
   modalState: State;
 }
 
+// Crea el contexto de notas con un valor nulo
 export const NotasContext = createContext<NotasContextProps | undefined>(undefined);
 
+// Componente proveedor de contexto de notas
 export const NotasProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [notas, setNotas] = useState<NotasProps[]>([
-    { id: 1, titulo: 'Sis', texto: 'Ayuda' },
-    { id: 2, titulo: 'Sass', texto: 'Dios' },
-    { id: 3, titulo: 'wa', texto: 'mio' },
-    { id: 4, titulo: 'sa', texto: 'por' },
-    { id: 5, titulo: 'pa', texto: 'favor' },
-    { id: 6, titulo: 'dre', texto: 'salvenme' },
-    { id: 7, titulo: 'nues', texto: 'que' },
-    { id: 8, titulo: 'tro', texto: 'no' },
-    { id: 9, titulo: 'que', texto: 'acabo' },
-    { id: 10, titulo: 'es', texto: 'esto' },
-    { id: 11, titulo: 'tas', texto: 'jesus' },
-    { id: 12, titulo: 'en', texto: 'baja' },
-    { id: 13, titulo: 'los', texto: 'AAAAAAAAAAAAAAAAAAAAAA' }
-  ]);
+  const [notas, setNotas] = useState<NotasProps[]>([]);
 
+  // Estado inicial para el modal
   const initialModalState: State = {
     id: null,
     isModalOpen: false,
     titulo: '',
     texto: '',
+    isConfirmModalOpen: false
   };
 
+  //useReducer para manejar el estado del modal
   const [modalState, dispatchModal] = useReducer(modalReducer, initialModalState);
 
+  // funcion para agregar una nueva nota
   const agregarNota = (titulo: string, texto: string) => {
     const nuevaNota = { id: notas.length + 1, titulo, texto };
     setNotas([...notas, nuevaNota]);
     dispatchModal({ type: 'CLOSE_MODAL' });
   };
 
+  // funcion para editar una nota existente
   const editarNota = (id: number, titulo: string, texto: string) => {
     const nuevasNotas = notas.map(nota =>
       nota.id === id ? { ...nota, titulo, texto } : nota
@@ -54,11 +48,13 @@ export const NotasProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     dispatchModal({ type: 'CLOSE_MODAL' });
   };
 
+  //funcion para eliminar una nota
   const eliminarNota = (id: number) => {
     const nuevasNotas = notas.filter(nota => nota.id !== id);
     setNotas(nuevasNotas);
   };
 
+  //funcion  para actualizar el orden de las notas
   const actualizarOrden = (nuevoOrden: NotasProps[]) => {
     setNotas(nuevoOrden);
   };

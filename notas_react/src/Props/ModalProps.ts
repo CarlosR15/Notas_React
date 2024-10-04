@@ -1,3 +1,4 @@
+//Props del modal
 export interface ModalProps {
   isOpen: boolean;
   onClose: () => void;

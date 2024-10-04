@@ -1,5 +1,6 @@
 import React from 'react';
 
+//Props pal modal de confirmacion
 interface ModalConfirmProps {
   isOpen: boolean;
   onClose: () => void;
@@ -7,8 +8,12 @@ interface ModalConfirmProps {
   message: string;
 }
 
+//componente modalconfirm que sirve pa confirmar jujiaasdifjas
 const ModalConfirm: React.FC<ModalConfirmProps> = ({ isOpen, onClose, onConfirm, message }) => {
+  // Si el modal no esta abierto no hace na
   if (!isOpen) return null;
+
+  //El modal pues
   return (
     <div className="modal-confirm-overlay">
       <div className="modal-confirm">
