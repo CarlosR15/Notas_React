@@ -12,19 +12,19 @@ const GeneradorCont: React.FC<GeneradorContProps> = ({ onCreateContainer, childr
         id: 'contenedor-notas',
     });
 
-    const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false); // Estado para el modal
+    const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
 
     const handleDrop = () => {
-        setIsConfirmModalOpen(true); // Abrir modal al soltar
+        setIsConfirmModalOpen(true);
     };
 
     const handleConfirmCreateContainer = () => {
-        onCreateContainer(); // Llamar a la función para crear el contenedor
-        setIsConfirmModalOpen(false); // Cerrar el modal
+        onCreateContainer();
+        setIsConfirmModalOpen(false);
     };
 
     const handleCancelCreateContainer = () => {
-        setIsConfirmModalOpen(false); // Cerrar el modal
+        setIsConfirmModalOpen(false);
     };
 
     return (

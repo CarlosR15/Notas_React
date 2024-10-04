@@ -38,16 +38,16 @@ const CardNota: React.FC<CardNotaProps> = ({ id, titulo, texto, onDelete, onEdit
 
     const handleDeleteClick = (e: React.MouseEvent) => {
         e.stopPropagation();
-        setIsDeleteConfirmModalOpen(true); // Abre el modal de confirmación
+        setIsDeleteConfirmModalOpen(true);
     };
 
     const handleConfirmDelete = () => {
         onDelete(id);
-        setIsDeleteConfirmModalOpen(false); // Cierra el modal después de eliminar
+        setIsDeleteConfirmModalOpen(false);
     };
 
     const handleCancelDelete = () => {
-        setIsDeleteConfirmModalOpen(false); // Cierra el modal si se cancela
+        setIsDeleteConfirmModalOpen(false);
     };
 
     return (
