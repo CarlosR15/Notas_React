@@ -8,6 +8,7 @@ interface ModalContenedorNotasProps {
   notas: NotasProps[];
   onDelete: (id: number) => void;
   onEdit: (id: number, titulo: string, texto: string) => void;
+  
 }
 
 const ModalContenedorNotas: React.FC<ModalContenedorNotasProps> = ({ isOpen, onClose, onDelete, onEdit, notas }) => {

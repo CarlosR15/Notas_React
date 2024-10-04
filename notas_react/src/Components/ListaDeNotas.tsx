@@ -130,11 +130,13 @@ const ListaNotas: React.FC = () => {
         onDragEnd={handleDragEnd}
       >
         <SortableContext items={items} strategy={rectSwappingStrategy}>
-          <GeneradorCont children={undefined}></GeneradorCont>
+          <GeneradorCont children={undefined} onCreateContainer={function (): void {
+            throw new Error('Function not implemented.');
+          } }></GeneradorCont>
           <div className="gridNotas">
             {items.map((nota) => (
               <CardNota
-                key={nota.id}
+                key={`nota-${nota.id}`}
                 id={nota.id}
                 titulo={nota.titulo}
                 texto={nota.texto}
@@ -142,9 +144,10 @@ const ListaNotas: React.FC = () => {
                 onEdit={(id: number, titulo: string, texto: string) => handleEdit(id, titulo, texto)}
               />
             ))}
+
             {contenedores.length > 0 && contenedores.map(contenedor => (
               <ContenedorNotas
-                key={contenedor.id}
+                key={`contenedor-${contenedor.id}`}
                 id={contenedor.id}
                 notas={contenedor.notas || []}
                 items={items || []}

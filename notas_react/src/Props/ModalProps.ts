@@ -5,4 +5,5 @@ export interface ModalProps {
   titulo: string;
   texto: string;
   dispatch: React.Dispatch<any>;
+  children?: React.ReactNode;
 }
